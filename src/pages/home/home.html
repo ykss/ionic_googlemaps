@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
+    <ion-title center>
+      Esquake
     </ion-title>
+    <!-- <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar> -->
   </ion-navbar>
+  <!-- <ion-searchbar></ion-searchbar> -->
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <google-map>
+  </google-map>
 </ion-content>
