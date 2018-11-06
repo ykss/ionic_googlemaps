@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
-import { File } from '@ionic-native/file';
 import * as products from "../../assets/shelter.json";
+import { File } from '@ionic-native/file';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 
 @Component({
@@ -27,17 +27,21 @@ export class GoogleMapComponent {
     } 
   }
 
-  search() {
-    let options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 5
-  };
+  // search() {
+  //   let options: NativeGeocoderOptions = {
+  //     useLocale: true,
+  //     maxResults: 5
+  // };
 
-  this.nativeGeocoder.forwardGeocode(this.address);
-  
-  }
+  // this.nativeGeocoder.forwardGeocode(this.address, options)
+  // .then((coordinates: NativeGeocoderForwardResult[]) => {
+  //   this.coords.lat=coordinates[0].latitude, 
+  //   this.coords.lng=coordinates[0].longitude
+  // }).catch((error: any) => console.log(error));
+  // }
 
   ngOnInit() {
+
     this.platform.ready().then(() => {
       this.geolocation.getCurrentPosition().then(pos => {
         this.coords.lat = pos.coords.latitude
@@ -46,6 +50,8 @@ export class GoogleMapComponent {
         this.getNearestShelter(5);
         this.initMap();
       }).catch((error) => {
+        console.log(error);
+        console.log(JSON.stringify(error));
         console.log("error");
       })
     })
@@ -107,14 +113,13 @@ export class GoogleMapComponent {
       icon: { url : '../../assets/imgs/currentMarkerImage.png'}
     });
     
-    var service = new google.maps.places.PlacesService(this.map);
-    
+    // var service = new google.maps.places.PlacesService(this.map);
 
     var otherMarker, i;
     var infowindow = new google.maps.InfoWindow();
 
     for (i = 0; i < this.shelter.length; i++) {
-      console.log(this.shelter[i]['dist'])
+      // console.log(this.shelter[i]['dist'])
       otherMarker = new google.maps.Marker({
         position: new google.maps.LatLng(this.shelter[i]['lat'], this.shelter[i]['lng']),
         map: this.map,

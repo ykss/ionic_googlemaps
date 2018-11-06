@@ -1,4 +1,4 @@
 <ion-header>
-    <ion-searchbar [(ngModel)]="address" (click)="search()"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="address" (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
 <div #map id="map"></div>
